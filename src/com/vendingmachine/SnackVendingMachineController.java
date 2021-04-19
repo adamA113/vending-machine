@@ -1,13 +1,17 @@
 package com.vendingmachine;
 
-public class SimpleVendingMachineController implements VendingMachineController {
+public class SnackVendingMachineController implements VendingMachineControllerInterface {
 
-    private Calculator calculator = new SimpleCalculator();
+    private CalculatorInterface calculator = new Calculator();
 
     @Override
-    public CoinBundle calculateChange(VendingMachineRequest request) {
-        int total = calculator.calculateTotal(request.enteredCoins);
-        int totalChange = total - request.product.getPrice();
+    public CoinBundle calculateChange(VendingMachineOrder order) throws Exception {
+        int total = calculator.calculateTotal(order.enteredCoins);
+        int totalChange = total - order.product.getPrice();
+        if(totalChange < 0){
+            System.out.println(" Insufficient amount of money");
+            throw new Exception("Insufficient money");
+        }
         return calculator.calculateChange(totalChange);
     }
 }
