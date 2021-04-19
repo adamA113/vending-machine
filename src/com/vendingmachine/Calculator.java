@@ -1,6 +1,6 @@
 package com.vendingmachine;
 
-public class SimpleCalculator implements Calculator{
+public class Calculator implements CalculatorInterface {
 
     @Override
     public int calculateTotal(CoinBundle enteredCoins) {
